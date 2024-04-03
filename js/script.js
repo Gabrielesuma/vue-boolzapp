@@ -6,11 +6,13 @@ createApp({
     data(){
         return{
             contacts: contacts,
-            activeContact: 1
+            activeContact: 1,
         }
     },
     methods:{
-
+        changeContact(id){
+            this.activeContact = id;
+        }
     },
     computed:{
         activeContacts(){
