@@ -14,19 +14,34 @@
 
 <body>
     <div id="app">
-        <div class="container h-100 gs-debug d-flex">
+        <div class="container h-100 d-flex">
             <div id="left" class="gs-debug">
                 <div id="header-left" class="d-flex align-items-center p-1">
                     <img src="img/avatar_io.jpg" alt="me">
-                    <div><b>Gabriele</b></div>
+                    <div class="m-1"><b>Gabriele</b></div>
                 </div>
                 <div id="notification" class="p-1">noti</div>
                 <div id="search" class="p-1">search</div>
-                <div id="contacts"></div>
+                <div id="contacts">
+                    <div class="contact d-flex border-bottom" :class="{'active': activeContact === contact.id}" v-for="(contact, intex) in contacts" :key="contact.id">
+                        <div class="align-content-center m-1">
+                            <img :src="contact.avatar" :alt="contact.name">
+                        </div>
+                        <div class="m-1">
+                            <h6>{{contact.name}}</h6>
+                            <p>ultimo messaggio</p>
+                        </div>
+                        <small class="time ms-auto">12.55</small>
+                    </div>
+                </div>
             </div>
             <div id="right" class="gs-debug">
                 <div id="header-right">header</div>
-                <div id="chat-conteiner">chat</div>
+                <div id="chat-container">
+                    <div class="p-1" v-for="(msg,index) in activeContacts.messages">
+                        <div class="msg" :class="msg.status">{{msg.message}}</div>
+                    </div>
+                </div>
                 <div id="right-input">input</div>
             </div>
         </div>
