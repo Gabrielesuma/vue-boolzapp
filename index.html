@@ -80,9 +80,19 @@
                 </div>
                 <div id="chat-container">
                     <div class="p-1" v-for="(msg,index) in activeContacts.messages">
-                        <div class="msg" :class="msg.status">
-                            <div>{{msg.message}}</div>
-                            <small>{{msg.date}}</small>
+                        <div class="msg d-flex justify-content-between" :class="msg.status">
+                            <div>
+                                <div>{{msg.message}}</div>
+                                <small>{{msg.date}}</small>
+                            </div>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                  
+                                </button>
+                                <ul class="dropdown-menu">
+                                  <li class="dropdown-item">Delete message</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>
