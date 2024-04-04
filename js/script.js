@@ -32,6 +32,13 @@ createApp({
                 const newMessage = this.createMessage('ok', 'received');
                 this.activeContacts.messages.push(newMessage);
             }, 1000);
+        },
+        removeItem(id){
+            const i = this.activeContacts.messages.findIndex((el)=> el.id === id);
+            console.log(i);
+            if(i!== -1){
+                this.activeContacts.messages.splice(i, 1);
+            }
         }
     },
     computed:{
