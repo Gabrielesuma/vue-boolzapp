@@ -43,12 +43,13 @@
                         <span class="input-group-text">
                             <i class="fa-solid fa-magnifying-glass"></i>
                         </span>
-                        <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat">
+                        <input type="text" class="form-control" placeholder="Cerca o inizia una nuova chat" v-model="searchText">
                       </div>
                 </div>
                 <div id="contacts">
+                    <div class="alert alert-danger" v-if="filteredContacts.length < 1">Non ci sono elementi correlati</div>
                     <div class="contact d-flex border-bottom" :class="{'active': activeContact === contact.id}"
-                        v-for="(contact, intex) in contacts" :key="contact.id" @click="changeContact(contact.id)">
+                        v-for="(contact, intex) in filteredContacts" :key="contact.id" @click="changeContact(contact.id)">
                         <div class="align-content-center m-1">
                             <img :src="contact.avatar" :alt="contact.name">
                         </div>
