@@ -24,6 +24,12 @@ createApp({
                 message: msg,
                 status: status
             }
+
+            //this.activeContacts.messages.push(newMessage);
+            
+            this.$nextTick(() => {
+                this.$refs.messages[this.$refs.messages.length - 1].scrollIntoView({behavior: 'smooth'});    
+            });
             return newMessage;
         },
         sendMessage(){
@@ -83,6 +89,6 @@ createApp({
         }
     },
     mounted(){
-        console.log(this.contacts);
+        
     }
 }).mount('#app');

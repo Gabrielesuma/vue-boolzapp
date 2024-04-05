@@ -75,7 +75,8 @@
                         </div>
                         <div class="pt-3 p-2">
                             <h6>{{contacts[activeContact - 1].name}}</h6>
-                            <p>Ultimo accesso {{lastAccess}}</p>
+                            <p v-if="messageText">sta scrivendo...</p>
+                            <p v-else>Ultimo accesso {{lastAccess}}</p>
                         </div>
                     </div>
                     <div>
@@ -85,7 +86,7 @@
                     </div>
                 </div>
                 <div id="chat-container">
-                    <div class="p-1" v-for="(msg,index) in activeContacts.messages">
+                    <div class="p-1" v-for="(msg,index) in activeContacts.messages" ref="messages">
                         <div class="msg d-flex justify-content-between" :class="msg.status">
                             <div>
                                 <div>{{msg.message}}</div>
@@ -106,7 +107,8 @@
                     <i class="fa-regular fa-face-smile"></i>
                     <input type="text" class="form-control w-75 h-75" placeholder="Scrivi un messaggio"
                         v-model="messageText" @keyup.enter="sendMessage()">
-                    <i class="fa-solid fa-microphone"></i>
+                    <i class="fa-regular fa-paper-plane" v-if="messageText" @click="sendMessage()"></i>
+                    <i class="fa-solid fa-microphone" v-else></i>
                 </div>
             </div>
         </div>
