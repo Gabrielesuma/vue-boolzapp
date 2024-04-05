@@ -9,12 +9,14 @@ createApp({
             contacts: contacts,
             activeContact: 1,
             messageText: '',
-            searchText: ''
+            searchText: '',
+            activeMsgIndex: null
         }
     },
     methods:{
         changeContact(id){
             this.activeContact = id;
+            this.activeMsgIndex = null;
         },
         createMessage(msg, status){
             const newMessage = {
@@ -33,11 +35,34 @@ createApp({
                 this.activeContacts.messages.push(newMessage);
             }, 1000);
         },
-        removeItem(id){
-            const i = this.activeContacts.messages.findIndex((el)=> el.id === id);
-            console.log(i);
-            if(i!== -1){
-                this.activeContacts.messages.splice(i, 1);
+        removeMessage(i){
+            this.activeContacts.messages.splice(i, 1);
+            this.activeMsgIndex = null;
+        },
+        toogleDropdown(index){
+            this.activeMsgIndex =  this.activeMsgIndex === index ? null : index
+        },
+        getContactIndex(id){
+            const index = this.contacts.findIndex((el) => el.id === id);
+            const msgLastIndex = this.contacts[index].messages.length - 1;
+            if(msgLastIndex >= 0){
+                return this.contacts[index].messages[msgLastIndex];
+            } else {
+                return '';
+            }
+        },
+        getLastMessage(id){
+            if(this.getContactIndex(id)){
+                return this.getContactIndex(id).message;
+            } else {
+                return 'non ci sono messaggi';
+            }
+        },
+        getLastDate(id){
+            if(this.getContactIndex(id)){
+                return this.getContactIndex(id).date;
+            } else {
+                return '';
             }
         }
     },
@@ -47,6 +72,14 @@ createApp({
         },
         filteredContacts(){
             return this.contacts.filter((el)=> el.name.toLowerCase().includes(this.searchText.toLowerCase()));
+        },
+        lastAccess(){
+            const index = this.activeContacts.messages.length - 1;
+            if(index >= 0){
+                return this.activeContacts.messages[index].date;
+            } else {
+                return '';
+            }
         }
     },
     mounted(){
